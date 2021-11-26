@@ -1,0 +1,26 @@
+{
+  "totalMiles": 100,
+  "totalAmount": 30,
+  "currencyId": "001",
+  "netMiles": 100,
+  "netAmount": 64.71,
+  "items": [
+    {
+      "identifier": "012",
+      "description": "Billetera cuero L",
+      "quantity": 1,
+      "amount": 30,
+      "currencyId": "001"
+    }
+  ],
+  "orderNumber": "10000050212",
+  "commerce": {
+    "code": "1235",
+    "name": "Comercio test"
+  },
+  "customer": {
+    "documentType": "3",
+    "documentNumber": "CE277062"
+  },
+  "terminal": "222221122"
+}

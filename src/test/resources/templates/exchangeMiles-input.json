@@ -1,0 +1,17 @@
+{
+  "totalMiles": "{totalMiles}",
+  "totalAmount": "{totalAmount}",
+  "currencyId": "{currencyIdOne}",
+  "netMiles": "{quantityMiles}",
+  "netAmount": "{netAmount}",
+  "items": [
+    {
+      "identifier": "{identifier}",
+      "description": "{description}",
+      "quantity": "{quantity}",
+      "amount": "{amount}",
+      "currencyId": "{currencyIdTwo}"
+    }
+  ],
+  "orderNumber": "{orderNumber}"
+}

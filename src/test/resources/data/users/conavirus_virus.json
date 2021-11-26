@@ -1,0 +1,26 @@
+{
+  "totalMiles": 2500,
+  "totalAmount": 141,
+  "currencyId": "001",
+  "netMiles": 2500,
+  "netAmount": 0,
+  "items": [
+    {
+      "identifier": "012",
+      "description": "Utensilios BBQ con maletin x 4 piezas + Tabla de picar Pig + Guantes",
+      "quantity": 1,
+      "amount": 141,
+      "currencyId": "001"
+    }
+  ],
+  "commerce": {
+    "code": "1235",
+    "name": "Comercio test"
+  },
+  "customer": {
+    "documentType": "1",
+    "documentNumber": "70520860"
+  },
+  "terminal": "222221122",
+  "orderNumber": "232331400"
+}

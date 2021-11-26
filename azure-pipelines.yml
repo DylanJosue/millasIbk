@@ -1,0 +1,81 @@
+#Configuracion pipeline: tkn-xpay-qa-servicios
+
+#$(System.DefaultWorkingDirectory)=/home/vsts/work/1/s
+#$(Pipeline.Workspace)=/home/vsts/work/1
+
+parameters:
+  - name: vmImage
+    type: string
+    displayName: Plataforma
+    #    default: 'ubuntu 16.04'
+    #    default: 'ubuntu-latest'
+    values:
+      - 'windows-latest'
+  #      - 'ubuntu-latest'
+  #      - 'macOS-latest'
+  - name: tags
+    type: string
+    displayName: Cucumber-tags a ejecutar
+    values:
+      - '@CONSULT_NIUBIZ'
+#      - '@ESC_APROV_CP01'
+#  - name: ruta
+
+trigger: none
+pr: none
+
+stages:
+  - stage: ejecutar_automatizacion_pruebas
+    displayName: Ejecutar automatizacion de pruebas
+    jobs:
+      - job: Construccion_ejecucion
+        pool:
+          vmImage: ${{ parameters.vmImage }}
+        steps:
+          - script: |
+              mvn clean
+            displayName: 'Limpiar proyecto'
+#          - script: |
+#              echo Creando carpeta archivosVarios para evidencias txt y demas - windows
+#              mkdir $(System.DefaultWorkingDirectory)\target\archivosVarios
+#            condition: contains('${{ parameters.vmImage }}', 'windows')
+#            displayName: 'creando carpeta archivosVarios - windows'
+#          - script: |
+#              echo Creando carpeta archivosVarios para evidencias txt y demas - linux
+#              mkdir -p $(System.DefaultWorkingDirectory)/target/archivosVarios
+#            condition: contains('${{ parameters.vmImage }}', 'ubuntu')
+#            displayName: 'creando carpeta archivosVarios - linux'
+          #          - script: |
+          #              echo Reemplazando dataDriven del workspace por el de SharePoint
+          #            condition: not(contains('${{ parameters.ruta }}', 'robot'))
+          #            displayName: 'reemplazando dataDriven'
+          - script: |
+              echo Commit-message: $(Build.SourceVersionMessage)
+              echo Cucumber-tags a ejecutar: ${{ parameters.tags }}
+              mvn verify -Dcucumber.options="src/test/resources/features/ --tags ${{ parameters.tags }}"
+            condition: not(startsWith(variables['Build.SourceVersionMessage'], 'noBuild'))
+            displayName: 'Ejecutar cucumber-tags'
+          - script: |
+              mvn serenity:aggregate
+            condition: always()
+            displayName: 'Generar reporte-serenity'
+          - task: PublishPipelineArtifact@1
+            condition: always()
+            inputs:
+              targetPath: './target/site/serenity/'
+              artifactName: 'ReporteSerenity'
+              artifactType: 'pipeline'
+            displayName: 'Publicar reporte'
+#          - task: PublishPipelineArtifact@1
+#            condition: always()
+#            inputs:
+#              targetPath: './target/archivosVarios/'
+#              artifactName: 'ArchivosVarios'
+#              artifactType: 'pipeline'
+#            displayName: 'Publicar archivos varios'
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '**/TEST-*.xml'
+              publishRunAttachments: true
+            displayName: 'Publicar resultados de pruebas'

@@ -1,0 +1,26 @@
+{
+  "totalMiles": 4700,
+  "totalAmount": 141,
+  "currencyId": "001",
+  "netMiles": 1,
+  "netAmount": 64.71,
+  "items": [
+    {
+      "identifier": "012",
+      "description": "RappiCreditos",
+      "quantity": 1,
+      "amount": 30,
+      "currencyId": "001"
+    }
+  ],
+  "commerce": {
+    "code": "1235",
+    "name": "Comercio test"
+  },
+  "customer": {
+    "documentType": "1",
+    "documentNumber": "50502463"
+  },
+  "terminal": "222221122",
+  "orderNumber": "4000000010"
+}

@@ -1,0 +1,14 @@
+{
+  "filter": {
+    "status": "{status}",
+    "flgConsent": "{flgConsent}",
+    "searchKey": "{searchKey}",
+    "startDate": "{startDate}",
+    "endDate": "{endDate}"
+  },
+  "pageable": {
+    "page": "{page}",
+    "size": "{size}",
+    "direction": "{direction}"
+  }
+}
