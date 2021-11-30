@@ -1,7 +1,7 @@
 @AllAnulacionMillas
 Feature: Anulacion canje de millas - NIUBIZ
 
-  @Automated @Happy_path @functional_testing @ANULATIONS_NIUBIZ1
+  @Automated @Happy_path @functional_testing @ANULATIONS_NIUBIZ
   Scenario Outline: [HAPPY PATH] Anulacion canje de millas por tarjeta
     Given que el usuario accede a la aplicacion
     When ingresamos al servicio de generar token para cliente <cliente>

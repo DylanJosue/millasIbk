@@ -145,7 +145,7 @@ Feature: Consultar saldo de millas con tarjeta - NIUBIZ
     #377754500179681
     Examples: TC Amex - American Express® Platinum
       | cardNumber      | codigo | documentType | documentNumber | mensaje          | cliente |
-      | 377754*****9681 | 403    | 1            | 50501743       | CUENTA BLOQUEADA | NIUBIZ  |
+      | 377754*****9681 | 403    | 1            | 50501743       | CUENTA DADA DE BAJA | NIUBIZ  |
 
     #377752610032360
     Examples: TC Amex - The Platinum Card®

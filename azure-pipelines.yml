@@ -13,17 +13,34 @@ parameters:
       - 'windows-latest'
   #      - 'ubuntu-latest'
   #      - 'macOS-latest'
-  - name: tags
-    type: string
-    displayName: Cucumber-tags a ejecutar
-    values:
-      - '@CONSULT_NIUBIZ'
+#  - name: tags
+#    type: string
+#    displayName: Cucumber-tags a ejecutar
+#    values:
+#      - '@CONSULT_NIUBIZ'
 #      - '@ESC_APROV_CP01'
 #  - name: ruta
-
+  - name: build
+    default: true
+    type: boolean
+  - name: report
+    default: true
+    type: boolean
 trigger: none
 pr: none
 
+variables:
+  - name: MAVEN_CACHE_FOLDER
+    value: $(Pipeline.Workspace)/.m2/repository
+  - name: MAVEN_OPTS
+    value: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+  - group: CUCUMBER_TEST_SUIT
+  - name: imageRepository
+    value: 'millas ibk'
+  - name: tag
+    value: '$(Build.BuildId)'
+  - name: vmImageName
+    value: 'ubuntu-latest'
 stages:
   - stage: ejecutar_automatizacion_pruebas
     displayName: Ejecutar automatizacion de pruebas
@@ -51,8 +68,8 @@ stages:
           #            displayName: 'reemplazando dataDriven'
           - script: |
               echo Commit-message: $(Build.SourceVersionMessage)
-              echo Cucumber-tags a ejecutar: ${{ parameters.tags }}
-              mvn verify -Dcucumber.options="src/test/resources/features/ --tags ${{ parameters.tags }}"
+              echo Cucumber-tags a ejecutar: @$(CUCUMBER_TEST_SUIT)
+              mvn verify -Dcucumber.options="src/test/resources/features/ --tags @$(CUCUMBER_TEST_SUIT)"
             condition: not(startsWith(variables['Build.SourceVersionMessage'], 'noBuild'))
             displayName: 'Ejecutar cucumber-tags'
           - script: |
